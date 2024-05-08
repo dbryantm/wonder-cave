@@ -1,41 +1,51 @@
-import type { MetaFunction } from "@remix-run/node";
+import { LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
+import db from '~/app/db.server'
+import { Contact } from '~/app/schemas/contact'
+import Header from '~/app/components/header'
+import Nav from '~/app/components/nav'
+import Pagination from '~/app/components/pagination'
+import ContactList from '~/app/components/contact/list'
+
+type IndexLoaderData = {
+  contacts: Contact[]
+  page: number
+  pages: number
+  limit: number
+}
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
+  return [{ title: 'Wonder Cave' }, { name: 'description', content: 'Wonder Cave - Phone Book' }]
+}
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  try {
+    const { searchParams } = new URL(request.url)
+    const page = Number(searchParams.get('page') || 1)
+    const limit = Number(searchParams.get('limit') || process.env.PAGINATION_LIMIT)
+    const contacts = await db.contact.findMany({ take: limit, skip: (page - 1) * limit })
+    const totalContacts = await db.contact.count()
+
+    return { contacts, page, pages: totalContacts / limit, limit }
+  } catch (err) {
+    return []
+  }
+}
 
 export default function Index() {
+  // This is such a weird issue to run into with remix
+  // https://github.com/remix-run/remix/issues/7599
+  const { contacts, ...pagination } = useLoaderData<typeof loader>() as unknown as IndexLoaderData
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
+    <>
+      <Header>
+        <Nav />
+      </Header>
+      <main className="px-4">
+        <ContactList contacts={contacts} />
+        <Pagination {...pagination} />
+      </main>
+    </>
+  )
 }

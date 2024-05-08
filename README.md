@@ -1,36 +1,61 @@
-# Welcome to Remix + Vite!
+# Wonder Cave
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+## Installation
 
-## Development
+`bun install`
 
-Run the Vite dev server:
+## Usage
 
-```shellscript
-npm run dev
-```
+`bun run dev`
 
-## Deployment
+## Testing
 
-First, build your app for production:
+Uses Jest for running all `*.spec.tsx?` files
 
-```sh
-npm run build
-```
+`bun run test`
 
-Then run the app in production mode:
+## Linting
 
-```sh
-npm start
-```
+Uses ESLint for TypeScript and Stylelint for CSS
 
-Now you'll need to pick a host to deploy it to.
+### All
 
-### DIY
+This runs `bun run lint:code`, `bun run lint:style`, and `bun run lint:format`
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+`bun run lint`
 
-Make sure to deploy the output of `npm run build`
+### Typescript
 
-- `build/server`
-- `build/client`
+`bun run lint:code`
+
+### CSS
+
+`bun run lint:style`
+
+## Formatting
+
+Formats using prettier
+
+`bun run lint:format`
+
+## Prisma
+
+Uses Prisma for managing the database along with migrations
+
+### Creating a new migration
+
+`bun run prisma:migrate`
+
+### Generating the client
+
+This would be handled when running `bun run prisma:migrate`
+
+`bun run prisma:generate`
+
+### Seeding the database
+
+`bun run prisma:seed`
+
+### Resetting the database
+
+`bun run prisma:reset`

@@ -1,0 +1,18 @@
+root = true
+
+[*]
+charset = utf-8
+max_line_length = 120
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{html,js,jsx,json,md,prisma,ts,tsx}]
+indent_size = 2
+indent_style = space
+
+[*.{js,jsx,md,ts,tsx}]
+quote_type = single
+
+[*.{json,html,prisma}]
+quote_type = double
