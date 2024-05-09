@@ -20,12 +20,7 @@ const variants = cva('mb-4 px-4 py-2', {
   },
 })
 
-export default function Header({
-  className,
-  children,
-  shadow = 'md',
-  ...props
-}: HeaderProps) {
+export default function Header({ className, children, shadow = 'md', ...props }: HeaderProps) {
   return (
     <header className={cx(variants({ shadow }), className)} {...props}>
       {children}

@@ -5,13 +5,9 @@ export interface CardBodyProps
   extends ComponentPropsWithRef<'div'>,
     VariantProps<typeof variants> {}
 
-const variants = cva('')
+const variants = cva('flex flex-col flex-1')
 
-export default function CardBody({
-  className,
-  children,
-  ...props
-}: CardBodyProps) {
+export default function CardBody({ className, children, ...props }: CardBodyProps) {
   return (
     <div className={cx(variants(), className)} {...props}>
       {children}

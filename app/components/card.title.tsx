@@ -7,11 +7,7 @@ export interface CardTitleProps
 
 const variants = cva('')
 
-export default function CardTitle({
-  className,
-  children,
-  ...props
-}: CardTitleProps) {
+export default function CardTitle({ className, children, ...props }: CardTitleProps) {
   return (
     <h3 className={cx(variants(), className)} {...props}>
       {children}

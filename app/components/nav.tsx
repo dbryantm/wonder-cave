@@ -2,9 +2,7 @@ import { ComponentPropsWithRef } from 'react'
 import { Link } from '@remix-run/react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-export interface NavProps
-  extends ComponentPropsWithRef<'nav'>,
-    VariantProps<typeof variants> {}
+export interface NavProps extends ComponentPropsWithRef<'nav'>, VariantProps<typeof variants> {}
 
 const variants = cva('')
 

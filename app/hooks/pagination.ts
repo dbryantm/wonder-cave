@@ -1,4 +1,5 @@
 import { useLocation } from '@remix-run/react'
+import { stringify } from 'qs'
 
 interface UsePaginationHook {
   pages: number
@@ -17,25 +18,19 @@ interface PaginationLink {
   disabled?: boolean
 }
 
-export default function usePagination({
-  pages,
-  page,
-  limit,
-}: UsePaginationHook) {
+export default function usePagination({ pages, page, limit }: UsePaginationHook) {
   const location = useLocation()
   const link = (i: number, special: 'first' | 'last' | null = null) => {
     return {
       text: i.toString(),
       to: {
         pathname: location.pathname,
-        search: `?page=${i}&limit=${limit}`,
+        search: stringify({ page: i, limit }),
       },
       first: special === 'first',
       last: special === 'last',
       disabled:
-        (special === 'first' && i === 1) ||
-        (special === 'last' && i === pages) ||
-        i === page,
+        (special === 'first' && i === 1) || (special === 'last' && i === pages) || i === page,
     }
   }
   const links: PaginationLink[] = []

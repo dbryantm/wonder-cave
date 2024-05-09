@@ -7,11 +7,7 @@ export interface PaginationProps
 
 const variants = cva('flex gap-4 px-4 py-2')
 
-export default function Pagination({
-  className,
-  children,
-  ...props
-}: PaginationProps) {
+export default function Pagination({ className, children, ...props }: PaginationProps) {
   return (
     <div className={cx(variants(), className)} {...props}>
       {children}

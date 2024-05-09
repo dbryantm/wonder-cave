@@ -8,14 +8,12 @@ import Nav from '~/app/components/nav'
 import List from '~/app/components/list'
 import Card from '~/app/components/card'
 import Pagination from '~/app/components/pagination'
-import PaginationLink from '~/app/components/pagination.link'
-import CardHeader from '../components/card.header'
+import Link from '~/app/components/link'
 import CardImage from '../components/card.image'
 import CardTitle from '../components/card.title'
 import CardBody from '../components/card.body'
-import { uuid } from '../helpers/uuid'
 
-type IndexLoaderData = {
+interface IndexLoaderData {
   contacts: Contact[]
   page: number
   pages: number
@@ -66,34 +64,35 @@ export default function Index() {
           {contacts.map((contact) => (
             <Card key={contact.id}>
               <CardImage
-                src={`https://i.pravatar.cc/75?${uuid(contact)}`}
+                src={contact.photo}
                 alt={`Image for ${contact.firstName} ${contact.lastName}`}
               />
-              <CardHeader>
-                <CardTitle>
-                  {`${contact.firstName} ${contact.lastName}`}
+              <CardBody className="text-sm">
+                <CardTitle className="text-lg">
+                  <Link
+                    to={{ pathname: '/contact' }}
+                  >{`${contact.firstName} ${contact.lastName}`}</Link>
                 </CardTitle>
-                <CardBody>
-                  <ul>
-                    <li>
-                      <strong>Email</strong> {contact.email}
-                    </li>
-                    <li>
-                      <strong>Phone</strong> {contact.phone}
-                    </li>
-                  </ul>
-                </CardBody>
-              </CardHeader>
+                <hr className="mb-2" />
+                <ul className="mb-2">
+                  <li>
+                    <strong>Email</strong> {contact.email}
+                  </li>
+                  <li>
+                    <strong>Phone</strong> {contact.phone}
+                  </li>
+                </ul>
+              </CardBody>
             </Card>
           ))}
         </List>
         <Pagination>
           {links.map(({ text, first, last, ...link }, i) => (
-            <PaginationLink key={`pagination-${i}`} {...link}>
+            <Link key={`pagination-${i}`} {...link}>
               {first ? <>&lt; First</> : null}
               {!first && !last ? <>{text}</> : null}
               {last ? <>Last &gt;</> : null}
-            </PaginationLink>
+            </Link>
           ))}
         </Pagination>
       </main>
