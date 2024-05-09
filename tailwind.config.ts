@@ -4,8 +4,6 @@ import forms from '@tailwindcss/forms'
 
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {},
-  },
+  theme: {},
   plugins: [typography, forms],
 } satisfies Config

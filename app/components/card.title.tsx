@@ -1,13 +1,13 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
+const variants = cva('text-lg')
+
 export interface CardTitleProps
   extends ComponentPropsWithRef<'h3'>,
     VariantProps<typeof variants> {}
 
-const variants = cva('')
-
-export default function CardTitle({ className, children, ...props }: CardTitleProps) {
+export function CardTitle({ className, children, ...props }: CardTitleProps) {
   return (
     <h3 className={cx(variants(), className)} {...props}>
       {children}

@@ -1,13 +1,13 @@
 import { useLocation } from '@remix-run/react'
 import { stringify } from 'qs'
 
-interface UsePaginationHook {
+export interface UsePaginationHook {
   pages: number
   page: number
   limit: number
 }
 
-interface PaginationLink {
+export interface PaginationLink {
   text: string
   to: {
     pathname: string
@@ -18,7 +18,7 @@ interface PaginationLink {
   disabled?: boolean
 }
 
-export default function usePagination({ pages, page, limit }: UsePaginationHook) {
+export function usePagination({ pages, page, limit }: UsePaginationHook) {
   const location = useLocation()
   const link = (i: number, special: 'first' | 'last' | null = null) => {
     return {

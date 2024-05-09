@@ -1,12 +1,11 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-const variants = cva('rounded h-10 px-4 py-2', {
+const variants = cva('rounded text-base p-1', {
   variants: {
     variant: {
-      primary: 'bg-primary text-primary-foreground',
-      outline: 'border border-input bg-background',
-      secondary: 'bg-secondary text-secondary-foreground',
+      primary: 'text-white bg-blue-400',
+      secondary: 'text-blue-400 dark:bg-white border border-blue-400',
     },
   },
   defaultVariants: {
@@ -18,12 +17,7 @@ export interface ButtonProps
   extends ComponentPropsWithRef<'button'>,
     VariantProps<typeof variants> {}
 
-export default function Button({
-  className,
-  children,
-  variant = 'primary',
-  ...props
-}: ButtonProps) {
+export function Button({ className, children, variant, ...props }: ButtonProps) {
   return (
     <button className={cx(variants({ variant }), className)} {...props}>
       {children}

@@ -1,17 +1,20 @@
 import { LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import db from '~/app/db.server'
-import usePagination from '~/app/hooks/pagination'
-import { Contact } from '~/app/schemas/contact'
-import Header from '~/app/components/header'
-import Nav from '~/app/components/nav'
-import List from '~/app/components/list'
-import Card from '~/app/components/card'
-import Pagination from '~/app/components/pagination'
-import Link from '~/app/components/link'
-import CardImage from '../components/card.image'
-import CardTitle from '../components/card.title'
-import CardBody from '../components/card.body'
+import { Contact } from '~/app/schemas'
+import { usePagination } from '~/app/hooks'
+import {
+  Button,
+  Card,
+  CardBody,
+  CardImage,
+  CardTitle,
+  Header,
+  Link,
+  List,
+  Nav,
+  Pagination,
+} from '~/app/components'
 
 interface IndexLoaderData {
   contacts: Contact[]
@@ -50,9 +53,20 @@ export default function Index() {
   return (
     <>
       <Header>
-        <Nav />
+        <Nav>
+          <Link to="/">
+            <strong>Wonder</strong> Cave
+          </Link>
+        </Nav>
       </Header>
       <main className="px-4">
+        <div className="mb-2 flex flex-1 flex-row justify-between">
+          <h1 className="text-xl">Contacts</h1>
+          <div className="flex gap-2">
+            <Button>Create Contact</Button>
+            <Button variant="secondary">Upload File</Button>
+          </div>
+        </div>
         <List>
           {contacts.map((contact) => (
             <Card key={contact.id}>
@@ -60,14 +74,14 @@ export default function Index() {
                 src={contact.photo}
                 alt={`Image for ${contact.firstName} ${contact.lastName}`}
               />
-              <CardBody className="text-sm">
-                <CardTitle className="text-lg">
+              <CardBody>
+                <CardTitle>
                   <Link
                     to={{ pathname: '/contact' }}
                   >{`${contact.firstName} ${contact.lastName}`}</Link>
+                  <hr />
                 </CardTitle>
-                <hr className="mb-2" />
-                <ul className="mb-2">
+                <ul>
                   <li>
                     <strong>Email</strong> {contact.email}
                   </li>

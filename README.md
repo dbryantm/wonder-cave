@@ -32,7 +32,7 @@ This runs `bun run lint:code`, `bun run lint:style`, and `bun run lint:format`
 
 `bun run lint:style`
 
-## Formatting
+### Formatting
 
 Formats using prettier
 
