@@ -1,4 +1,13 @@
-import { date, email, number, object, required, string, Input, omit } from 'valibot'
+import {
+  date,
+  email,
+  number,
+  object,
+  required,
+  string,
+  Input,
+  omit,
+} from 'valibot'
 
 export type Contact = Input<typeof contactSchema>
 
@@ -16,4 +25,8 @@ export const contactSchema = required(
 
 export const contactCreateSchema = omit(contactSchema, ['id', 'updatedAt'])
 
-export const contactUpdateSchema = omit(contactSchema, ['id', 'createdAt', 'updatedAt'])
+export const contactUpdateSchema = omit(contactSchema, [
+  'id',
+  'createdAt',
+  'updatedAt',
+])

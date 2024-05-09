@@ -1,17 +1,13 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-export interface PaginationProps
+export interface CardProps
   extends ComponentPropsWithRef<'div'>,
     VariantProps<typeof variants> {}
 
-const variants = cva('flex gap-4 px-4 py-2')
+const variants = cva('flex flex-row items-start border-1 shadow-md p-2 mb-2')
 
-export default function Pagination({
-  className,
-  children,
-  ...props
-}: PaginationProps) {
+export default function Card({ className, children, ...props }: CardProps) {
   return (
     <div className={cx(variants(), className)} {...props}>
       {children}
