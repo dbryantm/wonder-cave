@@ -60,16 +60,18 @@ export default function Index() {
         </Nav>
       </Header>
       <main className="px-4">
-        <div className="mb-2 flex flex-1 flex-row justify-between">
+        <div className="mb-4 flex flex-1 flex-row items-center justify-between">
           <h1 className="text-xl">Contacts</h1>
           <div className="flex gap-2">
-            <Button>Create Contact</Button>
+            <Link to="/contact" button variant="primary">
+              Create Contact
+            </Link>
             <Button variant="secondary">Upload File</Button>
           </div>
         </div>
         <List>
           {contacts.map((contact) => (
-            <Card key={contact.id}>
+            <Card key={contact.uuid}>
               <CardImage
                 src={contact.photo}
                 alt={`Image for ${contact.firstName} ${contact.lastName}`}
@@ -77,7 +79,7 @@ export default function Index() {
               <CardBody>
                 <CardTitle>
                   <Link
-                    to={{ pathname: '/contact' }}
+                    to={`/contact/${contact.uuid}`}
                   >{`${contact.firstName} ${contact.lastName}`}</Link>
                   <hr />
                 </CardTitle>

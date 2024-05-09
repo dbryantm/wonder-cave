@@ -8,7 +8,7 @@ export const meta: MetaFunction = () => {
   return [{ title: 'Wonder Cave' }, { name: 'description', content: 'Wonder Cave - Phone Book' }]
 }
 
-export default function CreateContact() {
+export default function UpdateContact() {
   return (
     <>
       <Header>
@@ -19,8 +19,8 @@ export default function CreateContact() {
         </Nav>
       </Header>
       <main className="px-4">
-        <div className="mb-2 flex flex-1 flex-row justify-between">
-          <h1 className="text-xl">Contacts</h1>
+        <div className="mb-4 flex flex-1 flex-row items-center justify-between">
+          <h1 className="text-xl">Update Contact</h1>
         </div>
         {/* <Form></Form> */}
       </main>

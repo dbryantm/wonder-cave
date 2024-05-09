@@ -5,6 +5,7 @@ export type Contact = Input<typeof contactSchema>
 export const contactSchema = required(
   object({
     id: number(),
+    uuid: string(),
     firstName: string(),
     lastName: string(),
     email: string([email()]),
