@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-const variants = cva('flex')
+const variants = cva('flex flex-row ')
 
 export interface CardFooterProps extends ComponentPropsWithRef<'div'>, VariantProps<typeof variants> {}
 

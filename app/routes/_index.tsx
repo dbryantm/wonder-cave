@@ -58,7 +58,7 @@ export default function Index() {
         <Header>
           <h1 className="text-4xl">The Phone Book</h1>
           <div className="ml-auto flex gap-2">
-            <Link to="/contact" button variant="primary">
+            <Link to="/contact" button variant="primary" size="lg">
               Create Contact
             </Link>
             <Button variant="secondary">Upload File</Button>
@@ -87,7 +87,11 @@ export default function Index() {
                   <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
                 </p>
               </CardContent>
-              <CardFooter></CardFooter>
+              <CardFooter>
+                <Link to={`/contact/${contact.uuid}`} button variant="primary">
+                  Edit
+                </Link>
+              </CardFooter>
             </Card>
           ))}
         </Grid>
