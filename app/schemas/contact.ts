@@ -16,6 +16,6 @@ export const contactSchema = required(
   }),
 )
 
-export const contactCreateSchema = omit(contactSchema, ['id', 'updatedAt'])
+export const createContactSchema = omit(contactSchema, ['id', 'updatedAt'])
 
-export const contactUpdateSchema = omit(contactSchema, ['id', 'createdAt', 'updatedAt'])
+export const updateContactSchema = omit(contactSchema, ['id', 'createdAt', 'updatedAt'])

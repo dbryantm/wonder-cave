@@ -7,22 +7,23 @@ import { type ButtonProps } from '~/app/components'
 const variants = cva('', {
   variants: {
     button: {
-      true: 'text-decoration-none inline-block rounded text-base',
+      true: 'text-decoration-none inline-block rounded',
     },
     variant: {
       primary: 'bg-blue-400 text-white hover:bg-blue-500',
       secondary: 'bg-white text-blue-400 outline-blue-400 hover:text-blue-500 hover:outline-blue-500',
+      warning: 'bg-red-400 text-white hover:bg-red-500',
       link: 'bg-transparent outline-blue-400 hover:bg-blue-500',
     },
     size: {
       sm: 'text-sm',
-      md: 'text-base',
+      md: '',
       lg: 'text-lg',
     },
   },
   compoundVariants: [
-    { button: true, size: 'sm', className: 'px-1 py-1' },
-    { button: true, size: 'md', className: 'px-2 py-1' },
+    { button: true, size: 'sm', className: 'px-2 py-1' },
+    { button: true, size: 'md', className: 'px-4 py-2' },
     { button: true, size: 'lg', className: 'px-4 py-2' },
   ],
   defaultVariants: {
@@ -43,7 +44,9 @@ export interface LinkProps
 
 export function Link({ button, className, children, href, to, variant, size, ...props }: LinkProps) {
   return href ? (
-    <a href={href}>{children}</a>
+    <a href={href} {...props} data-test="link">
+      {children}
+    </a>
   ) : (
     <RemixLink
       className={cx(variants({ button, variant, size }), className)}

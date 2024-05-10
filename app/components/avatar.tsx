@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-const variants = cva('w-[100%] max-w-[35px] rounded-full bg-neutral-100 dark:bg-neutral-600')
+const variants = cva('w-[100%] max-w-[30px] rounded bg-neutral-100 dark:bg-neutral-600')
 
 export interface AvatarProps extends ComponentPropsWithRef<'img'>, VariantProps<typeof variants> {
   alt: string

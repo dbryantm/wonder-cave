@@ -7,7 +7,7 @@ export interface GridColProps extends ComponentPropsWithRef<'div'>, VariantProps
 
 export function GridCol({ className, children, ...props }: GridColProps) {
   return (
-    <div className={cx(variants(), className)} {...props} data-test="card.header">
+    <div className={cx(variants(), className)} {...props} data-test="grid.col">
       {children}
     </div>
   )

@@ -1,7 +1,6 @@
 import { LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import db from '~/app/db.server'
-import { Contact } from '~/app/schemas'
 import { usePagination } from '~/app/hooks'
 import {
   Avatar,
@@ -18,38 +17,34 @@ import {
   PaginationLink,
 } from '~/app/components'
 
-interface IndexLoaderData {
-  contacts: Contact[]
-  page: number
-  pages: number
-  limit: number
-}
-
 export const meta: MetaFunction = () => {
   return [{ title: 'Wonder Cave' }, { name: 'description', content: 'Wonder Cave - Phone Book' }]
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const { searchParams } = new URL(request.url)
+  const page = Number(searchParams.get('page') || 1)
+  const limit = Number(searchParams.get('limit') || process.env.PAGINATION_LIMIT)
+  const pages = 0
+
   try {
-    const { searchParams } = new URL(request.url)
-    const page = Number(searchParams.get('page') || 1)
-    const limit = Number(searchParams.get('limit') || process.env.PAGINATION_LIMIT)
     const contacts = await db.contact.findMany({
       take: limit,
       skip: (page - 1) * limit,
     })
     const total = await db.contact.count()
+    const pages = Math.ceil(total / limit)
 
-    return { contacts, page, pages: Math.ceil(total / limit), limit }
+    return { contacts, page, pages, limit }
   } catch (err) {
-    return []
+    return { contacts: [], page, pages, limit }
   }
 }
 
 export default function Index() {
   // This is such a weird issue between Remix and TypeScript
   // https://github.com/remix-run/remix/issues/7599
-  const { contacts, ...pagination } = useLoaderData<typeof loader>() as unknown as IndexLoaderData
+  const { contacts, ...pagination } = useLoaderData<typeof loader>()
   const links = usePagination(pagination)
 
   return (
@@ -71,10 +66,7 @@ export default function Index() {
               <CardHeader>
                 <Avatar src={contact.photo} alt={`Image for ${contact.firstName} ${contact.lastName}`} />
                 <CardTitle>
-                  <Link
-                    className="text-2xl"
-                    to={`/contact/${contact.uuid}`}
-                  >{`${contact.firstName} ${contact.lastName}`}</Link>
+                  <Link to={`/contact/${contact.uuid}`}>{`${contact.firstName} ${contact.lastName}`}</Link>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -90,6 +82,9 @@ export default function Index() {
               <CardFooter>
                 <Link to={`/contact/${contact.uuid}`} button variant="primary">
                   Edit
+                </Link>
+                <Link to={`/contact/${contact.uuid}/delete`} button variant="warning">
+                  Delete
                 </Link>
               </CardFooter>
             </Card>

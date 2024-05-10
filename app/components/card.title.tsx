@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-const variants = cva('text-xl')
+const variants = cva('text-2xl')
 
 export interface CardTitleProps extends ComponentPropsWithRef<'h3'>, VariantProps<typeof variants> {}
 

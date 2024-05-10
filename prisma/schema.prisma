@@ -15,7 +15,7 @@ datasource db {
 
 model Contact {
   id        Int      @id @default(autoincrement())
-  uuid      String
+  uuid      String   @unique
   firstName String
   lastName  String
   email     String
