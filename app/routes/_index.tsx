@@ -4,16 +4,18 @@ import db from '~/app/db.server'
 import { Contact } from '~/app/schemas'
 import { usePagination } from '~/app/hooks'
 import {
+  Avatar,
   Button,
   Card,
-  CardBody,
-  CardImage,
+  CardContent,
+  CardFooter,
+  CardHeader,
   CardTitle,
+  Grid,
   Header,
   Link,
-  List,
-  Nav,
   Pagination,
+  PaginationLink,
 } from '~/app/components'
 
 interface IndexLoaderData {
@@ -36,9 +38,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       take: limit,
       skip: (page - 1) * limit,
     })
-    const totalContacts = await db.contact.count()
+    const total = await db.contact.count()
 
-    return { contacts, page, pages: totalContacts / limit, limit }
+    return { contacts, page, pages: Math.ceil(total / limit), limit }
   } catch (err) {
     return []
   }
@@ -52,56 +54,50 @@ export default function Index() {
 
   return (
     <>
-      <Header>
-        <Nav>
-          <Link to="/">
-            <strong>Wonder</strong> Cave
-          </Link>
-        </Nav>
-      </Header>
-      <main className="px-4">
-        <div className="mb-4 flex flex-1 flex-row items-center justify-between">
-          <h1 className="text-xl">Contacts</h1>
-          <div className="flex gap-2">
+      <main className="p-4">
+        <Header>
+          <h1 className="text-4xl">The Phone Book</h1>
+          <div className="ml-auto flex gap-2">
             <Link to="/contact" button variant="primary">
               Create Contact
             </Link>
             <Button variant="secondary">Upload File</Button>
           </div>
-        </div>
-        <List>
+        </Header>
+        <hr className="m-4" />
+        <Grid cols={3}>
           {contacts.map((contact) => (
             <Card key={contact.uuid}>
-              <CardImage
-                src={contact.photo}
-                alt={`Image for ${contact.firstName} ${contact.lastName}`}
-              />
-              <CardBody>
+              <CardHeader>
+                <Avatar src={contact.photo} alt={`Image for ${contact.firstName} ${contact.lastName}`} />
                 <CardTitle>
                   <Link
+                    className="text-2xl"
                     to={`/contact/${contact.uuid}`}
                   >{`${contact.firstName} ${contact.lastName}`}</Link>
-                  <hr />
                 </CardTitle>
-                <ul>
-                  <li>
-                    <strong>Email</strong> {contact.email}
-                  </li>
-                  <li>
-                    <strong>Phone</strong> {contact.phone}
-                  </li>
-                </ul>
-              </CardBody>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-2">
+                  <strong className="text-sm">Email</strong>
+                  <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
+                </div>
+                <p className="flex items-center gap-2">
+                  <strong className="text-sm">Phone</strong>
+                  <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
+                </p>
+              </CardContent>
+              <CardFooter></CardFooter>
             </Card>
           ))}
-        </List>
+        </Grid>
         <Pagination>
           {links.map(({ text, first, last, ...link }, i) => (
-            <Link key={`pagination-${i}`} {...link}>
+            <PaginationLink key={`pagination-${i}`} {...link}>
               {first ? <>&lt; First</> : null}
               {!first && !last ? <>{text}</> : null}
               {last ? <>Last &gt;</> : null}
-            </Link>
+            </PaginationLink>
           ))}
         </Pagination>
       </main>

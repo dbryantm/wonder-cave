@@ -3,7 +3,7 @@ import { Form } from '@remix-run/react'
 import { v4 } from 'uuid'
 // import db from '~/app/db.server'
 // import { createContactSchema, Contact } from '~/app/schemas'
-import { Button, Header, Link, Nav } from '~/app/components'
+import { Button, Header, Link } from '~/app/components'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Wonder Cave' }, { name: 'description', content: 'Wonder Cave - Phone Book' }]
@@ -14,17 +14,11 @@ export default function CreateContact() {
 
   return (
     <>
-      <Header>
-        <Nav>
-          <Link to="/">
-            <strong>Wonder</strong> Cave
-          </Link>
-        </Nav>
-      </Header>
-      <main className="px-4">
-        <div className="mb-4 flex flex-1 flex-row items-center justify-between">
-          <h1 className="text-xl">Create Contact</h1>
-        </div>
+      <main className="p-4">
+        <Header>
+          <h1 className="text-4xl">Create Contact</h1>
+        </Header>
+        <hr className="m-4" />
         <Form className="form" action="/contact" method="post">
           <input type="hidden" name="uuid" defaultValue={uuid} />
           <div className="flex gap-4">
@@ -41,13 +35,7 @@ export default function CreateContact() {
           </div>
           <div className="flex gap-4">
             <label htmlFor="phone">Phone</label>
-            <input
-              className="text-black"
-              type="text"
-              name="phone"
-              maxLength={12}
-              pattern="\d{3}-\d{3}-\d{4}"
-            />
+            <input className="text-black" type="text" name="phone" maxLength={12} pattern="\d{3}-\d{3}-\d{4}" />
           </div>
           <div>
             <Button type="submit" variant="primary">

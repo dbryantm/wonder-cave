@@ -1,11 +1,12 @@
 import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
-const variants = cva('rounded text-base p-1', {
+const variants = cva(['rounded px-4 py-2 text-base'], {
   variants: {
     variant: {
-      primary: 'text-white bg-blue-400',
-      secondary: 'text-blue-400 dark:bg-white border border-blue-400',
+      primary: 'bg-blue-400 text-white hover:bg-blue-500',
+      secondary: 'border bg-white text-blue-400 outline-blue-400 hover:text-blue-500 hover:outline-blue-500',
+      link: 'bg-white text-blue-400 outline-blue-400 hover:text-blue-500 hover:outline-blue-500',
     },
   },
   defaultVariants: {
@@ -13,13 +14,13 @@ const variants = cva('rounded text-base p-1', {
   },
 })
 
-export interface ButtonProps
-  extends ComponentPropsWithRef<'button'>,
-    VariantProps<typeof variants> {}
+export interface ButtonProps extends ComponentPropsWithRef<'button'>, VariantProps<typeof variants> {
+  variant?: 'primary' | 'secondary' | 'link'
+}
 
 export function Button({ className, children, variant, ...props }: ButtonProps) {
   return (
-    <button className={cx(variants({ variant }), className)} {...props}>
+    <button className={cx(variants({ variant }), className)} {...props} data-test="button">
       {children}
     </button>
   )

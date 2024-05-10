@@ -2,15 +2,17 @@ import { ComponentPropsWithRef } from 'react'
 import { Link as RemixLink } from '@remix-run/react'
 import { type RemixLinkProps } from '@remix-run/react/dist/components'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
+import { type ButtonProps } from '~/app/components'
 
 const variants = cva('', {
   variants: {
     button: {
-      true: 'rounded text-base p-1',
+      true: 'text-decoration-none inline-block rounded px-4 py-2 text-base',
     },
     variant: {
-      primary: 'text-white bg-blue-400',
-      secondary: 'text-blue-400 dark:bg-white border border-blue-400',
+      primary: 'bg-blue-400 text-white hover:bg-blue-500',
+      secondary: 'bg-white text-blue-400 outline-blue-400 hover:text-blue-500 hover:outline-blue-500',
+      link: 'bg-transparent outline-blue-400 hover:bg-blue-500',
     },
   },
   defaultVariants: {
@@ -21,14 +23,17 @@ const variants = cva('', {
 export interface LinkProps
   extends ComponentPropsWithRef<'a'>,
     VariantProps<typeof variants>,
-    RemixLinkProps {
+    Omit<RemixLinkProps, 'to'> {
   button?: boolean
-  variant?: 'primary' | 'secondary'
+  variant?: ButtonProps['variant']
+  to?: RemixLinkProps['to']
 }
 
-export function Link({ button, className, children, variant, ...props }: LinkProps) {
-  return (
-    <RemixLink className={cx(variants({ button, variant }), className)} {...props}>
+export function Link({ button, className, children, href, to, variant, ...props }: LinkProps) {
+  return href ? (
+    <a href={href}>{children}</a>
+  ) : (
+    <RemixLink className={cx(variants({ button, variant }), className)} to={to ? to : ''} {...props} data-test="link">
       {children}
     </RemixLink>
   )

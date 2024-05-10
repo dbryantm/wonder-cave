@@ -7,7 +7,7 @@ export interface ListProps extends ComponentPropsWithRef<'div'>, VariantProps<ty
 
 export function List({ className, children, ...props }: ListProps) {
   return (
-    <div className={cx(variants(), className)} {...props}>
+    <div className={cx(variants(), className)} {...props} data-test="list">
       {children}
     </div>
   )

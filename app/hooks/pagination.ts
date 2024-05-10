@@ -29,8 +29,7 @@ export function usePagination({ pages, page, limit }: UsePaginationHook) {
       },
       first: special === 'first',
       last: special === 'last',
-      disabled:
-        (special === 'first' && i === 1) || (special === 'last' && i === pages) || i === page,
+      disabled: (special === 'first' && i === 1) || (special === 'last' && i === pages) || i === page,
     }
   }
   const links: PaginationLink[] = []
