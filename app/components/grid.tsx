@@ -2,6 +2,12 @@ import { ComponentPropsWithRef } from 'react'
 import { cva, cx, type VariantProps } from 'class-variance-authority'
 
 const variants = cva(['grid'], {
+  defaultVariants: {
+    flow: 'col',
+    rows: 'auto',
+    cols: 'auto',
+    gap: 4,
+  },
   variants: {
     flow: {
       row: 'grid-flow-row',
@@ -55,15 +61,9 @@ const variants = cva(['grid'], {
       12: 'gap-12',
     },
   },
-  defaultVariants: {
-    flow: 'col',
-    rows: 'auto',
-    cols: 'auto',
-    gap: 4,
-  },
 })
 
-type GridSizes = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+export type GridSizes = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 export interface GridProps extends ComponentPropsWithRef<'div'>, VariantProps<typeof variants> {
   flow?: 'col' | 'row'

@@ -3,7 +3,7 @@ import { Form, useLoaderData } from '@remix-run/react'
 import { parse } from 'valibot'
 import db from '~/app/db.server'
 import { updateContactSchema } from '~/app/schemas'
-import { Button, Header, Grid, Input, Link } from '~/app/components'
+import { Button, Header, Input, Link } from '~/app/components'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Wonder Cave' }, { name: 'description', content: 'Wonder Cave - Phone Book' }]

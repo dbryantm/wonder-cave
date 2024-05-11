@@ -1,3 +1,1 @@
-bun run lint:code
-bun run lint:style
-bun run lint:format
+bun run lint

@@ -5,6 +5,12 @@ import { cva, cx, type VariantProps } from 'class-variance-authority'
 import { type ButtonSizes, type ButtonVariants } from '~/app/components'
 
 const variants = cva('', {
+  defaultVariants: {
+    button: false,
+    size: 'md',
+    variant: 'primary',
+    outline: false,
+  },
   variants: {
     button: {
       true: 'text-decoration-none inline-block rounded',
@@ -62,12 +68,6 @@ const variants = cva('', {
     { button: false, variant: 'tertiary', outline: false, className: 'text-emerald-400 hover:text-emerald-500' },
     { button: false, variant: 'error', outline: false, className: 'text-red-400 hover:text-red-500' },
   ],
-  defaultVariants: {
-    button: false,
-    size: 'md',
-    variant: 'primary',
-    outline: false,
-  },
 })
 
 export interface LinkProps
