@@ -10,7 +10,6 @@ interface ContactRow {
   lastName: string
   email: string
   phone: string
-  photo: string
 }
 
 interface Contact {
@@ -19,7 +18,6 @@ interface Contact {
   lastName: string
   email: string
   phone: string
-  photo: string
   createdAt: Date
 }
 
@@ -34,7 +32,6 @@ for (let i = 0; i < 10; i++) {
   const lastName = faker.person.lastName()
   const email = `${firstName}.${lastName}@email.com`.toLowerCase()
   const phone = faker.helpers.fromRegExp('[1-9]{3}-[0-9]{3}-[0-9]{4}')
-  const photo = `https://i.pravatar.cc/300?id=${uuid}`
 
   csv.write({
     uuid,
@@ -42,7 +39,6 @@ for (let i = 0; i < 10; i++) {
     lastName,
     email,
     phone,
-    photo,
   })
 }
 

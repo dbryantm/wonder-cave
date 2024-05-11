@@ -10,12 +10,9 @@ export const contactSchema = required(
     lastName: string(),
     email: string([email()]),
     phone: string(),
-    photo: string(),
     createdAt: date(),
     updatedAt: date(),
   }),
 )
 
-export const createContactSchema = omit(contactSchema, ['id', 'updatedAt'])
-
-export const updateContactSchema = omit(contactSchema, ['id', 'createdAt', 'updatedAt'])
+export const contactUpsertSchema = omit(contactSchema, ['id', 'createdAt', 'updatedAt'])

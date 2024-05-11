@@ -1,7 +1,7 @@
 import { useRouteError, Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
 import type { LinksFunction } from '@remix-run/node'
 import { Header } from '~/app/components'
-import tailwind from '~/app/tailwind.css?url'
+import tailwind from '~/app/styles/tailwind.css?url'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: tailwind }]
 
@@ -11,7 +11,7 @@ export function ErrorBoundary() {
   return (
     <html lang="en">
       <head>
-        <title>Whoops...</title>
+        <title>Whoops... | Wonder Cave</title>
         <Meta />
         <Links />
       </head>

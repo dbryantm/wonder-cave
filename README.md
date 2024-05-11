@@ -66,4 +66,4 @@ Use to create a file for testing uploads
 
 ### Creating a new CSV file
 
-`bun run csv:seed`
+`bun run data:seed`

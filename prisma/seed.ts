@@ -11,7 +11,6 @@ async function main() {
     const lastName = faker.person.lastName()
     const email = `${firstName}.${lastName}@email.com`.toLowerCase()
     const phone = faker.helpers.fromRegExp('[1-9]{3}-[0-9]{3}-[0-9]{4}')
-    const photo = `https://i.pravatar.cc/300?id=${uuid}`
     const createdAt = new Date()
 
     await db.contact.create({
@@ -21,7 +20,6 @@ async function main() {
         lastName,
         email,
         phone,
-        photo,
         createdAt,
       },
     })
