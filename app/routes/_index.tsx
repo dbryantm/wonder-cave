@@ -4,7 +4,6 @@ import db from '~/app/db.server'
 import { usePagination } from '~/app/hooks'
 import {
   Avatar,
-  Button,
   Card,
   CardContent,
   CardFooter,
@@ -53,10 +52,12 @@ export default function Index() {
         <Header>
           <h1 className="text-4xl">The Phone Book</h1>
           <div className="ml-auto flex gap-2">
-            <Link to="/contact" button variant="primary" size="lg">
+            <Link to="/contact" button size="lg" variant="primary">
               Create Contact
             </Link>
-            <Button variant="secondary">Upload File</Button>
+            <Link to="/contact/upload" button size="lg" variant="secondary" outline>
+              Upload Contacts
+            </Link>
           </div>
         </Header>
         <hr className="m-4" />
@@ -80,10 +81,10 @@ export default function Index() {
                 </p>
               </CardContent>
               <CardFooter>
-                <Link to={`/contact/${contact.uuid}`} button variant="primary">
-                  Edit
+                <Link to={`/contact/${contact.uuid}`} button size="sm" variant="primary">
+                  Update
                 </Link>
-                <Link to={`/contact/${contact.uuid}/delete`} button variant="warning">
+                <Link to={`/contact/${contact.uuid}/delete`} button size="sm" variant="error" outline>
                   Delete
                 </Link>
               </CardFooter>
@@ -93,9 +94,9 @@ export default function Index() {
         <Pagination>
           {links.map(({ text, first, last, ...link }, i) => (
             <PaginationLink key={`pagination-${i}`} {...link}>
-              {first ? <>&lt; First</> : null}
+              {first ? <>&laquo;</> : null}
               {!first && !last ? <>{text}</> : null}
-              {last ? <>Last &gt;</> : null}
+              {last ? <>&raquo;</> : null}
             </PaginationLink>
           ))}
         </Pagination>

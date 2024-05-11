@@ -1,7 +1,7 @@
 import { Link, type LinkProps } from '~/app/components'
 import { cva, cx } from 'class-variance-authority'
 
-const variants = cva('text-xl')
+const variants = cva('text-xl hover:bg-sky-500')
 
 export interface PaginationLinkProps extends LinkProps {}
 

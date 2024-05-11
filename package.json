@@ -3,6 +3,9 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "browserslist": [
+    "defaults"
+  ],
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev --port 8000",
@@ -30,6 +33,7 @@
     "@remix-run/serve": "^2.9.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "fast-csv": "^5.0.1",
     "isbot": "^4.1.0",
     "lucide-react": "^0.378.0",
     "qs": "^6.12.1",
