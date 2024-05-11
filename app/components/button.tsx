@@ -19,8 +19,8 @@ const variants = cva('rounded', {
       true: 'border bg-white',
     },
     size: {
-      sm: 'p-2 text-sm',
-      md: 'p-2',
+      sm: 'px-4 py-2 text-sm',
+      md: 'px-4 py-2',
       lg: 'px-4 py-2 text-lg ',
     },
   },

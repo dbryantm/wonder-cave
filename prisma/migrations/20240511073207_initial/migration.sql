@@ -10,3 +10,6 @@ CREATE TABLE "contact" (
     "createdAt" DATETIME NOT NULL,
     "updatedAt" DATETIME NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "contact_uuid_key" ON "contact"("uuid");

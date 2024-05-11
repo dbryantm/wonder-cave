@@ -19,7 +19,7 @@ export default function CreateContact() {
         <Header>
           <h1 className="text-4xl">Create Contact</h1>
         </Header>
-        <hr className="m-4" />
+        <hr className="my-4" />
         <Form className="form" action="/contact" method="post">
           <Input type="hidden" name="uuid" defaultValue={uuid} />
           <div className="mb-4">

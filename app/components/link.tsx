@@ -32,8 +32,8 @@ const variants = cva('', {
     },
   },
   compoundVariants: [
-    { button: true, size: 'sm', className: 'p-2' },
-    { button: true, size: 'md', className: 'p-2' },
+    { button: true, size: 'sm', className: 'px-4 py-2' },
+    { button: true, size: 'md', className: 'px-4 py-2' },
     { button: true, size: 'lg', className: 'px-4 py-2' },
     { button: true, variant: 'primary', outline: false, className: 'bg-sky-400 text-white hover:bg-sky-500' },
     { button: true, variant: 'secondary', outline: false, className: 'bg-teal-400 text-white hover:bg-teal-500' },

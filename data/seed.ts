@@ -33,7 +33,7 @@ for (let i = 0; i < 10; i++) {
   const firstName = faker.person.firstName()
   const lastName = faker.person.lastName()
   const email = `${firstName}.${lastName}@email.com`.toLowerCase()
-  const phone = faker.helpers.fromRegExp('([1-9]{3}) [0-9]{3}-[0-9]{4}')
+  const phone = faker.helpers.fromRegExp('[1-9]{3}-[0-9]{3}-[0-9]{4}')
   const photo = `https://i.pravatar.cc/300?id=${uuid}`
 
   csv.write({

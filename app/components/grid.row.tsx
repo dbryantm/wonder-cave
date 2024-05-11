@@ -57,9 +57,9 @@ const variants = cva('', {
 })
 
 export interface GridRowProps extends ComponentPropsWithRef<'div'>, VariantProps<typeof variants> {
-  span: GridSizes | 'auto' | 'full'
-  start: GridSizes | 'auto'
-  end: GridSizes | 'auto'
+  span?: GridSizes | 'auto' | 'full'
+  start?: GridSizes | 'auto'
+  end?: GridSizes | 'auto'
 }
 
 export function GridRow({ className, children, span, start, end, ...props }: GridRowProps) {

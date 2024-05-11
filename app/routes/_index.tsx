@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
   Grid,
+  GridCol,
   Header,
   Link,
   Pagination,
@@ -55,40 +56,42 @@ export default function Index() {
             <Link to="/contact" button size="lg" variant="primary">
               Create Contact
             </Link>
-            <Link to="/contact/upload" button size="lg" variant="secondary" outline>
+            <Link to="/upload" button size="lg" variant="secondary" outline>
               Upload Contacts
             </Link>
           </div>
         </Header>
-        <hr className="m-4" />
+        <hr className="my-4" />
         <Grid cols={3}>
           {contacts.map((contact) => (
-            <Card key={contact.uuid}>
-              <CardHeader>
-                <Avatar src={contact.photo} alt={`Image for ${contact.firstName} ${contact.lastName}`} />
-                <CardTitle>
-                  <Link to={`/contact/${contact.uuid}`}>{`${contact.firstName} ${contact.lastName}`}</Link>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-2">
-                  <strong className="text-sm">Email</strong>
-                  <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
-                </div>
-                <p className="flex items-center gap-2">
-                  <strong className="text-sm">Phone</strong>
-                  <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Link to={`/contact/${contact.uuid}`} button size="sm" variant="primary">
-                  Update
-                </Link>
-                <Link to={`/contact/${contact.uuid}/delete`} button size="sm" variant="error" outline>
-                  Delete
-                </Link>
-              </CardFooter>
-            </Card>
+            <GridCol key={contact.uuid}>
+              <Card>
+                <CardHeader>
+                  <Avatar src={contact.photo} alt={`Image for ${contact.firstName} ${contact.lastName}`} />
+                  <CardTitle>
+                    <Link to={`/contact/${contact.uuid}`}>{`${contact.firstName} ${contact.lastName}`}</Link>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-2">
+                    <strong className="text-sm">Email</strong>
+                    <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
+                  </div>
+                  <p className="flex items-center gap-2">
+                    <strong className="text-sm">Phone</strong>
+                    <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Link to={`/contact/${contact.uuid}`} button size="sm" variant="primary">
+                    Update
+                  </Link>
+                  <Link to={`/contact/${contact.uuid}/delete`} button size="sm" variant="error" outline>
+                    Delete
+                  </Link>
+                </CardFooter>
+              </Card>
+            </GridCol>
           ))}
         </Grid>
         <Pagination>

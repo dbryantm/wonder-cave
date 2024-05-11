@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
   return [{ title: 'Wonder Cave' }, { name: 'description', content: 'Wonder Cave - Phone Book' }]
 }
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
+export const action = async ({ request, params }: ActionFunctionArgs) => {
   const form = await request.formData()
   const { uuid } = params
   const input = {
@@ -17,16 +17,15 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     firstName: form.get('firstName') as string,
     lastName: form.get('lastName') as string,
     email: form.get('email') as string,
-    phone: (form.get('phone') as string).replace(new RegExp(/^(\d{3})-/i), '($1) '),
+    phone: form.get('phone') as string,
     photo: `${form.get('photo') as string}?id=${form.get('uuid') as string}`,
-    createdAt: new Date(),
   }
 
   try {
     const data = parse(updateContactSchema, input)
     await db.contact.update({ data, where: { uuid } })
 
-    return redirect(`/contact/${data.uuid}/update`)
+    return redirect('/')
   } catch (err) {
     // handle error
   }
@@ -43,9 +42,10 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
     return contact
   } catch (err) {
-    return null
+    throw new Error('We could not find the contact you were searching for...')
   }
 }
+
 export default function CreateContact() {
   const contact = useLoaderData<typeof loader>()
 
@@ -55,8 +55,8 @@ export default function CreateContact() {
         <Header>
           <h1 className="text-4xl">Update Contact</h1>
         </Header>
-        <hr className="m-4" />
-        <Form className="form" action="/contact" method="post">
+        <hr className="my-4" />
+        <Form className="form" action={`/contact/${contact.uuid}`} method="post">
           <Input type="hidden" name="uuid" defaultValue={contact.uuid} />
           <div className="mb-4">
             <label className="block" htmlFor="firstName">
@@ -112,9 +112,5 @@ export default function CreateContact() {
         </Form>
       </main>
     </>
-  ) : (
-    <>
-      <p>Whoops</p>
-    </>
-  )
+  ) : null
 }

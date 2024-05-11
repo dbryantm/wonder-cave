@@ -59,3 +59,11 @@ This would be handled when running `bun run prisma:migrate`
 ### Resetting the database
 
 `bun run prisma:reset`
+
+## Data
+
+Use to create a file for testing uploads
+
+### Creating a new CSV file
+
+`bun run csv:seed`
