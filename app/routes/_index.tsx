@@ -1,8 +1,7 @@
-import { LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
+import { type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { db } from '~/app/.server'
 import { usePagination } from '~/app/hooks'
-import { type Contact } from '~/app/schemas'
 import {
   Card,
   CardContent,
@@ -29,10 +28,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const pages = 0
 
   try {
-    const contacts: Contact[] = await db.$queryRaw<
-      Contact[]
-    >`SELECT c.* FROM contact c ORDER BY c.lastName ASC, c.firstName ASC LIMIT ${limit} OFFSET ${offset}`
-
+    const contacts = await db.contact.findMany({
+      orderBy: {
+        lastName: 'asc',
+      },
+      take: limit,
+      skip: offset,
+    })
     const total = await db.contact.count()
     const pages = Math.ceil(total / limit)
 
@@ -64,7 +66,7 @@ export default function IndexRoute() {
         </div>
       </Header>
       <main className="p-4">
-        <Grid cols={3}>
+        <Grid cols={2} colsMd={3} colsLg={4}>
           {contacts.map((contact) => (
             <GridCol key={contact.uuid}>
               <Card>
@@ -75,13 +77,21 @@ export default function IndexRoute() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
-                    <strong className="text-sm">Email</strong>
-                    <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
+                    <p>
+                      <strong className="text-sm">Email</strong>
+                    </p>
+                    <p className="truncate">
+                      <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
+                    </p>
                   </div>
-                  <p className="flex items-center gap-2">
-                    <strong className="text-sm">Phone</strong>
-                    <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p>
+                      <strong className="text-sm">Phone</strong>
+                    </p>
+                    <p>
+                      <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
+                    </p>
+                  </div>
                 </CardContent>
                 <CardFooter>
                   <Link to={`/contact/${contact.uuid}/update`} button size="sm" variant="primary">
