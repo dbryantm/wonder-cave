@@ -3,7 +3,7 @@ import { Form, useLoaderData } from '@remix-run/react'
 import { parse } from 'valibot'
 import { db } from '~/app/.server'
 import { contactUpsertSchema } from '~/app/schemas'
-import { Button, Input, Link } from '~/app/components'
+import { Button, Input, Label, Link } from '~/app/components'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Update Contact | Wonder Cave' }]
@@ -60,35 +60,36 @@ export default function ContactUpdateRoute() {
       <Form className="form" action={`/contact/${contact.uuid}/update`} method="post">
         <Input type="hidden" name="uuid" defaultValue={contact.uuid} />
         <div className="mb-4">
-          <label className="block" htmlFor="firstName">
+          <Label className="block" htmlFor="firstName">
             <strong>First Name</strong>
-          </label>
+          </Label>
           <Input
-            className="form-input"
             type="text"
+            id="firstName"
             name="firstName"
             placeholder="First Name"
             defaultValue={contact.firstName}
           />
         </div>
         <div className="mb-4">
-          <label className="block" htmlFor="lastName">
+          <Label className="block" htmlFor="lastName">
             <strong>Last Name</strong>
-          </label>
-          <Input type="text" name="lastName" placeholder="Last Name" defaultValue={contact.lastName} />
+          </Label>
+          <Input type="text" id="lastName" name="lastName" placeholder="Last Name" defaultValue={contact.lastName} />
         </div>
         <div className="mb-4">
-          <label className="block" htmlFor="email">
+          <Label className="block" htmlFor="email">
             <strong>Email</strong>
-          </label>
-          <Input type="text" name="email" placeholder="first.last@email.com" defaultValue={contact.email} />
+          </Label>
+          <Input type="text" id="email" name="email" placeholder="first.last@email.com" defaultValue={contact.email} />
         </div>
         <div className="mb-4">
-          <label className="block" htmlFor="phone">
+          <Label className="block" htmlFor="phone">
             <strong>Phone</strong>
-          </label>
+          </Label>
           <Input
             type="text"
+            id="phone"
             name="phone"
             maxLength={12}
             placeholder="123-456-7890"

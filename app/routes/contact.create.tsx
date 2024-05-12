@@ -4,7 +4,7 @@ import { v4 } from 'uuid'
 import { parse } from 'valibot'
 import { db } from '~/app/.server'
 import { contactUpsertSchema } from '~/app/schemas'
-import { Button, Input, Link } from '~/app/components'
+import { Button, Input, Label, Link } from '~/app/components'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Create Contact | Wonder Cave' }]
@@ -41,28 +41,35 @@ export default function ContactCreateRoute() {
       <Form className="form" action="/contact/create" method="post">
         <Input type="hidden" name="uuid" defaultValue={uuid} />
         <div className="mb-4">
-          <label className="block" htmlFor="firstName">
+          <Label className="block" htmlFor="firstName">
             <strong>First Name</strong>
-          </label>
-          <Input className="form-input" type="text" name="firstName" placeholder="First Name" />
+          </Label>
+          <Input className="form-input" type="text" id="firstName" name="firstName" placeholder="First Name" />
         </div>
         <div className="mb-4">
-          <label className="block" htmlFor="lastName">
+          <Label className="block" htmlFor="lastName">
             <strong>Last Name</strong>
-          </label>
-          <Input type="text" name="lastName" placeholder="Last Name" />
+          </Label>
+          <Input type="text" id="lastName" name="lastName" placeholder="Last Name" />
         </div>
         <div className="mb-4">
-          <label className="block" htmlFor="email">
+          <Label className="block" htmlFor="email">
             <strong>Email</strong>
-          </label>
-          <Input type="text" name="email" placeholder="first.last@email.com" />
+          </Label>
+          <Input type="text" id="email" name="email" placeholder="first.last@email.com" />
         </div>
         <div className="mb-4">
-          <label className="block" htmlFor="phone">
+          <Label className="block" htmlFor="phone">
             <strong>Phone</strong>
-          </label>
-          <Input type="text" name="phone" maxLength={12} placeholder="123-456-7890" pattern="\d{3}-\d{3}-\d{4}" />
+          </Label>
+          <Input
+            type="text"
+            id="phone"
+            name="phone"
+            maxLength={12}
+            placeholder="123-456-7890"
+            pattern="\d{3}-\d{3}-\d{4}"
+          />
         </div>
         <div className="flex gap-2">
           <Button type="submit" variant="primary">
