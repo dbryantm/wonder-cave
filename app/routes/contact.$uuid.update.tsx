@@ -1,6 +1,5 @@
 import { redirect, type ActionFunctionArgs, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
-import { Form, useLoaderData } from '@remix-run/react'
-import { parse } from 'valibot'
+import { useLoaderData, Form } from '@remix-run/react'
 import { db } from '~/app/.server'
 import { contactUpsertSchema } from '~/app/schemas'
 import { Button, Input, Label, Link } from '~/app/components'
@@ -21,7 +20,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 
   try {
-    const data = parse(contactUpsertSchema, input)
+    const data = contactUpsertSchema.parse(input)
     await db.contact.update({ data, where: { uuid } })
 
     return redirect('/')
@@ -68,6 +67,7 @@ export default function ContactUpdateRoute() {
             id="firstName"
             name="firstName"
             placeholder="First Name"
+            minLength={3}
             defaultValue={contact.firstName}
           />
         </div>
@@ -75,13 +75,27 @@ export default function ContactUpdateRoute() {
           <Label className="block" htmlFor="lastName">
             <strong>Last Name</strong>
           </Label>
-          <Input type="text" id="lastName" name="lastName" placeholder="Last Name" defaultValue={contact.lastName} />
+          <Input
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Last Name"
+            minLength={3}
+            defaultValue={contact.lastName}
+          />
         </div>
         <div className="mb-4">
           <Label className="block" htmlFor="email">
             <strong>Email</strong>
           </Label>
-          <Input type="text" id="email" name="email" placeholder="first.last@email.com" defaultValue={contact.email} />
+          <Input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="first.last@email.com"
+            minLength={3}
+            defaultValue={contact.email}
+          />
         </div>
         <div className="mb-4">
           <Label className="block" htmlFor="phone">
@@ -91,6 +105,7 @@ export default function ContactUpdateRoute() {
             type="text"
             id="phone"
             name="phone"
+            minLength={12}
             maxLength={12}
             placeholder="123-456-7890"
             pattern="\d{3}-\d{3}-\d{4}"

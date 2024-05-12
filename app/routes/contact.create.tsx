@@ -1,7 +1,6 @@
 import { redirect, type ActionFunctionArgs, type MetaFunction } from '@remix-run/node'
 import { Form } from '@remix-run/react'
 import { v4 } from 'uuid'
-import { parse } from 'valibot'
 import { db } from '~/app/.server'
 import { contactUpsertSchema } from '~/app/schemas'
 import { Button, Input, Label, Link } from '~/app/components'
@@ -18,11 +17,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     lastName: form.get('lastName') as string,
     email: form.get('email') as string,
     phone: form.get('phone') as string,
-    createdAt: new Date(),
   }
 
   try {
-    const data = parse(contactUpsertSchema, input)
+    const data = contactUpsertSchema.parse(input)
     await db.contact.create({ data })
 
     return redirect('/')
@@ -44,19 +42,26 @@ export default function ContactCreateRoute() {
           <Label className="block" htmlFor="firstName">
             <strong>First Name</strong>
           </Label>
-          <Input className="form-input" type="text" id="firstName" name="firstName" placeholder="First Name" />
+          <Input
+            className="form-input"
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="First Name"
+            minLength={3}
+          />
         </div>
         <div className="mb-4">
           <Label className="block" htmlFor="lastName">
             <strong>Last Name</strong>
           </Label>
-          <Input type="text" id="lastName" name="lastName" placeholder="Last Name" />
+          <Input type="text" id="lastName" name="lastName" minLength={3} placeholder="Last Name" />
         </div>
         <div className="mb-4">
           <Label className="block" htmlFor="email">
             <strong>Email</strong>
           </Label>
-          <Input type="text" id="email" name="email" placeholder="first.last@email.com" />
+          <Input type="text" id="email" name="email" minLength={3} placeholder="first.last@email.com" />
         </div>
         <div className="mb-4">
           <Label className="block" htmlFor="phone">
@@ -66,6 +71,7 @@ export default function ContactCreateRoute() {
             type="text"
             id="phone"
             name="phone"
+            minLength={12}
             maxLength={12}
             placeholder="123-456-7890"
             pattern="\d{3}-\d{3}-\d{4}"
