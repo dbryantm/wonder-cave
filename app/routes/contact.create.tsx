@@ -1,6 +1,6 @@
 import { redirect, type ActionFunctionArgs, type MetaFunction } from '@remix-run/node'
 import { useActionData } from '@remix-run/react'
-import { db } from '~/app/.server'
+import { db } from '~/app/db.server'
 import { contactCreateSchema } from '~/app/schemas'
 import { formatErrors, type FormError } from '~/app/helpers'
 import { ContactForm } from '~/app/forms'

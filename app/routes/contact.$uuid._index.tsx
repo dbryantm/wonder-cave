@@ -1,6 +1,6 @@
 import { type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import { db } from '~/app/.server'
+import { db } from '~/app/db.server'
 import { Link } from '~/app/components'
 
 export const meta: MetaFunction = () => {
