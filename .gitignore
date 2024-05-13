@@ -6,3 +6,7 @@ node_modules
 
 # Prisma
 /prisma/dev.db
+
+# Examples
+/examples/*.csv
+!/examples/example.csv

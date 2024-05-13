@@ -9,7 +9,7 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev --port 8000",
-    "start": "remix-serve ./build/server/index.js",
+    "start": "PORT=8000 remix-serve ./build/server/index.js",
     "test": "vitest",
     "typecheck": "tsc",
     "lint": "bun run lint:code && bun run lint:style && bun run lint:format",
@@ -20,7 +20,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:reset": "prisma migrate reset",
     "prisma:seed": "prisma db seed",
-    "example:seed": "bun run ./example/seed.ts",
+    "example:seed": "bun run ./examples/seed.ts",
     "prepare": "husky"
   },
   "prisma": {

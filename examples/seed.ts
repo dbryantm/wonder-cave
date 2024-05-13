@@ -22,7 +22,7 @@ interface Contact {
 }
 
 const csv = format<ContactRow, Contact>({ headers: true })
-const stream = fs.createWriteStream(path.resolve(__dirname, 'example.csv'))
+const stream = fs.createWriteStream(path.resolve(__dirname, `${Date.now()}.csv`))
 
 csv.pipe(stream).on('end', () => process.exit())
 
