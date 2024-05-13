@@ -10,7 +10,7 @@ export interface InputErrorProps extends ComponentPropsWithRef<'span'>, VariantP
 
 export function InputError({ className, message: message, ...props }: InputErrorProps) {
   return (
-    <span className={cx(variants(), className)} {...props} data-test="input.error">
+    <span className={cx(variants(), className)} {...props} data-testid="input.error">
       {message !== undefined ? message : null}
     </span>
   )

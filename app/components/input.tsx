@@ -17,5 +17,5 @@ export interface InputProps extends ComponentPropsWithRef<'input'>, VariantProps
 }
 
 export function Input({ className, error, type = 'text', ...props }: InputProps) {
-  return <input className={cx(variants({ error }), className)} type={type} {...props} data-test="input" />
+  return <input className={cx(variants({ error }), className)} type={type} {...props} data-testid="input" />
 }

@@ -10,6 +10,7 @@
     "build": "remix vite:build",
     "dev": "remix vite:dev --port 8000",
     "start": "remix-serve ./build/server/index.js",
+    "test": "vitest",
     "typecheck": "tsc",
     "lint": "bun run lint:code && bun run lint:style && bun run lint:format",
     "lint:code": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
@@ -47,10 +48,15 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@happy-dom/global-registrator": "^14.10.1",
     "@remix-run/dev": "^2.9.1",
+    "@remix-run/testing": "^2.9.2",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.13",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
     "@types/qs": "^6.9.15",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
@@ -65,6 +71,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "happy-dom": "^14.10.1",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
@@ -76,7 +83,8 @@
     "tsx": "^4.9.3",
     "typescript": "^5.4.5",
     "vite": "^5.1.0",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.2.1",
+    "vitest": "^1.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

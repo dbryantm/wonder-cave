@@ -21,7 +21,7 @@ const variants = cva('', {
       11: 'row-span-11',
       12: 'row-span-12',
       auto: 'row-auto',
-      full: 'row-full',
+      full: 'row-span-full',
     },
     start: {
       1: 'row-start-1',
@@ -36,7 +36,7 @@ const variants = cva('', {
       10: 'row-start-10',
       11: 'row-start-11',
       12: 'row-start-12',
-      auto: 'row-auto',
+      auto: 'row-start-auto',
     },
     end: {
       1: 'row-end-1',
@@ -51,7 +51,7 @@ const variants = cva('', {
       10: 'row-end-10',
       11: 'row-end-11',
       12: 'row-end-12',
-      auto: 'row-auto',
+      auto: 'row-end-auto',
     },
   },
 })
@@ -64,7 +64,7 @@ export interface GridRowProps extends ComponentPropsWithRef<'div'>, VariantProps
 
 export function GridRow({ className, children, span, start, end, ...props }: GridRowProps) {
   return (
-    <div className={cx(variants({ span, start, end }), className)} {...props} data-test="grid.row">
+    <div className={cx(variants({ span, start, end }), className)} {...props} data-testid="grid.row">
       {children}
     </div>
   )

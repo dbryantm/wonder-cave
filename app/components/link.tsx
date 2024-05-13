@@ -83,7 +83,7 @@ export interface LinkProps
 
 export function Link({ button, className, children, href, to, variant, size, outline, ...props }: LinkProps) {
   return href ? (
-    <a href={href} {...props} data-test="link">
+    <a href={href} {...props} data-testid="link">
       {children}
     </a>
   ) : (
@@ -91,7 +91,7 @@ export function Link({ button, className, children, href, to, variant, size, out
       className={cx(variants({ button, variant, size, outline }), className)}
       to={to ? to : ''}
       {...props}
-      data-test="link"
+      data-testid="link"
     >
       {children}
     </RemixLink>

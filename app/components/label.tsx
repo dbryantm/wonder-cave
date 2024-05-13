@@ -7,7 +7,7 @@ export interface LabelProps extends ComponentPropsWithRef<'label'>, VariantProps
 
 export function Label({ className, children, ...props }: LabelProps) {
   return (
-    <label className={cx(variants(), className)} {...props} data-test="label">
+    <label className={cx(variants(), className)} {...props} data-testid="label">
       {children}
     </label>
   )

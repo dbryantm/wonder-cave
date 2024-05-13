@@ -7,7 +7,7 @@ export interface CardProps extends ComponentPropsWithRef<'div'>, VariantProps<ty
 
 export function Card({ className, children, ...props }: CardProps) {
   return (
-    <div className={cx(variants(), className)} {...props} data-test="card">
+    <div className={cx(variants(), className)} {...props} data-testid="card">
       {children}
     </div>
   )

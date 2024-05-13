@@ -7,7 +7,7 @@ export interface CardHeaderProps extends ComponentPropsWithRef<'div'>, VariantPr
 
 export function CardHeader({ className, children, ...props }: CardHeaderProps) {
   return (
-    <div className={cx(variants(), className)} {...props} data-test="card.header">
+    <div className={cx(variants(), className)} {...props} data-testid="card.header">
       {children}
     </div>
   )

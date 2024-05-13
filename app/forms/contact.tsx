@@ -20,7 +20,7 @@ export function ContactForm({ className, contact, errors }: ContactFormProps) {
   const error = useErrors(errors)
 
   return (
-    <Form className={cx(variants(), className)} action={action} method="post" data-testid="contact.form">
+    <Form className={cx(variants(), className)} action={action} method="post" data-testidid="contact.form">
       <Input type="hidden" name="uuid" defaultValue={contact ? contact.uuid : uuid} />
       <div className="mb-4">
         <Label className="block" htmlFor="firstName">

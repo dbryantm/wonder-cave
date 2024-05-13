@@ -139,7 +139,7 @@ const variants = cva(['grid'], {
       10: 'md:grid-cols-10',
       11: 'md:grid-cols-11',
       12: 'md:grid-cols-12',
-      auto: 'cols-auto',
+      auto: 'md:cols-auto',
     },
     colsLg: {
       0: 'lg:grid-cols-0',
@@ -232,7 +232,7 @@ export function Grid({
         className,
       )}
       {...props}
-      data-test="grid"
+      data-testid="grid"
     >
       {children}
     </div>

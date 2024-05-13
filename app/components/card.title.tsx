@@ -7,7 +7,7 @@ export interface CardTitleProps extends ComponentPropsWithRef<'h3'>, VariantProp
 
 export function CardTitle({ className, children, ...props }: CardTitleProps) {
   return (
-    <h3 className={cx(variants(), className)} {...props} data-test="card.title">
+    <h3 className={cx(variants(), className)} {...props} data-testid="card.title">
       {children}
     </h3>
   )

@@ -7,7 +7,7 @@ export interface HeaderProps extends ComponentPropsWithRef<'header'>, VariantPro
 
 export function Header({ className, children, ...props }: HeaderProps) {
   return (
-    <header className={cx(variants(), className)} {...props} data-test="header">
+    <header className={cx(variants(), className)} {...props} data-testid="header">
       {children}
     </header>
   )

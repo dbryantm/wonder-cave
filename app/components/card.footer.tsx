@@ -7,7 +7,7 @@ export interface CardFooterProps extends ComponentPropsWithRef<'div'>, VariantPr
 
 export function CardFooter({ className, children, ...props }: CardFooterProps) {
   return (
-    <div className={cx(variants(), className)} {...props} data-test="card.header">
+    <div className={cx(variants(), className)} {...props} data-testid="card.footer">
       {children}
     </div>
   )

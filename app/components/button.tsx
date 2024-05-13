@@ -64,7 +64,7 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'>, VariantPro
 
 export function Button({ className, children, variant, size, outline = false, ...props }: ButtonProps) {
   return (
-    <button className={cx(variants({ variant, size, outline }), className)} {...props} data-test="button">
+    <button className={cx(variants({ variant, size, outline }), className)} {...props} data-testid="button">
       {children}
     </button>
   )

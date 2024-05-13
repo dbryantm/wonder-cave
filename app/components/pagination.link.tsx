@@ -6,5 +6,5 @@ const variants = cva('text-xl hover:bg-sky-500')
 export interface PaginationLinkProps extends LinkProps {}
 
 export function PaginationLink(props: PaginationLinkProps) {
-  return <Link button variant="link" className={cx(variants())} {...props} data-test="pagination.link"></Link>
+  return <Link button variant="link" className={cx(variants())} {...props} data-testid="pagination.link"></Link>
 }
