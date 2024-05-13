@@ -14,6 +14,10 @@ Once you have all requirements met you can run.
 
 `bun install`
 
+First, lets copy the `.env` file from `.env.example`.
+
+`cp .env.example .env`
+
 Next you will need to create the database.
 
 `bun run prisma:migrate`
@@ -25,10 +29,6 @@ That should have also seeded data for you which you can view using either the CL
 For generating an example CSV file using the unix time as the file's name (i.e. `/examples/1715610416489.csv`).
 
 `bun run example:seed`
-
-Next, lets copy the `.env` file from `.env.example`.
-
-`cp .env.example .env`
 
 Now you're ready for prime time. So lets build the app.
 
