@@ -26,6 +26,10 @@ For generating an example CSV file using the unix time as the file's name (i.e. 
 
 `bun run example:seed`
 
+Next, lets copy the `.env` file from `.env.example`.
+
+`cp .env.example .env`
+
 Now you're ready for prime time. So lets build the app.
 
 `bun run build`
