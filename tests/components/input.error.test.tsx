@@ -1,22 +1,21 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { InputError } from '~/app/components'
 
-cleanup()
-
-describe('input.error', () => {
+describe('components.input.error', () => {
   it('render', () => {
-    const { getByTestId } = render(<InputError name="test" message={undefined} />)
-    const el = getByTestId('input.error')
+    const { getByTestId } = render(<InputError name="test" message={undefined} data-testid="test" />)
+
+    const el = getByTestId('test')
 
     expect(el.innerText).toEqual('')
   })
 
   it('message', () => {
-    const { getByTestId } = render(<InputError name="test" message="Test" />)
-    const el = getByTestId('input.error')
+    const { getByTestId } = render(<InputError name="test" message="Test" data-testid="test" />)
 
-    expect(el.innerText).toEqual('Test')
+    const el = getByTestId('test')
+
+    expect(el).toHaveTextContent('Test')
   })
 })

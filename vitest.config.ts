@@ -5,8 +5,6 @@ export default defineConfig(
   mergeConfig(viteConfig, {
     test: {
       environment: 'happy-dom',
-      globals: true,
-      reporters: ['default'],
     },
   }),
 )

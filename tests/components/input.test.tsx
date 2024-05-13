@@ -1,15 +1,15 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { Input } from '~/app/components'
 
-cleanup()
-
-describe('input', () => {
+describe('components.input', () => {
   it('render', () => {
-    const { getByTestId } = render(<Input defaultValue="Test" />)
-    const el = getByTestId('input')
+    const { getByPlaceholderText } = render(<Input id="test" name="test" placeholder="Test" defaultValue="Test" />)
 
-    expect(el.getAttribute('value')).toEqual('Test')
+    const el = getByPlaceholderText('Test')
+
+    expect(el).toHaveAttribute('id', 'test')
+    expect(el).toHaveAttribute('name', 'test')
+    expect(el).toHaveAttribute('value', 'Test')
   })
 })

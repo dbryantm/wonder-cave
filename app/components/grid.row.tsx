@@ -64,7 +64,7 @@ export interface GridRowProps extends ComponentPropsWithRef<'div'>, VariantProps
 
 export function GridRow({ className, children, span, start, end, ...props }: GridRowProps) {
   return (
-    <div className={cx(variants({ span, start, end }), className)} {...props} data-testid="grid.row">
+    <div className={cx(variants({ span, start, end }), className)} {...props}>
       {children}
     </div>
   )

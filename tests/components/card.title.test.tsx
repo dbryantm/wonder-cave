@@ -1,15 +1,13 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { CardTitle } from '~/app/components'
 
-cleanup()
-
-describe('card.title', () => {
+describe('components.card.title', () => {
   it('render', () => {
-    const { getByTestId } = render(<CardTitle>Test</CardTitle>)
-    const el = getByTestId('card.title')
+    const { getByText } = render(<CardTitle>Test</CardTitle>)
 
-    expect(el.innerText).toEqual('Test')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
   })
 })

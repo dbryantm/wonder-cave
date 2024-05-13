@@ -1,15 +1,13 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { Pagination } from '~/app/components'
 
-cleanup()
-
-describe('pagination', () => {
+describe('components.pagination', () => {
   it('render', () => {
-    const { getByTestId } = render(<Pagination>Test</Pagination>)
-    const el = getByTestId('pagination')
+    const { getByText } = render(<Pagination>Test</Pagination>)
 
-    expect(el.innerText).toEqual('Test')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
   })
 })

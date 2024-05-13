@@ -7,7 +7,7 @@ export interface CardContentProps extends ComponentPropsWithRef<'div'>, VariantP
 
 export function CardContent({ className, children, ...props }: CardContentProps) {
   return (
-    <div className={cx(variants(), className)} {...props} data-testid="card.content">
+    <div className={cx(variants(), className)} {...props}>
       {children}
     </div>
   )

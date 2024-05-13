@@ -1,109 +1,117 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { Button } from '~/app/components'
 
-cleanup()
-
-describe('button', () => {
+describe('components.button', () => {
   it('render', () => {
-    const { getByTestId } = render(<Button>Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button>Test</Button>)
 
-    expect(el.innerText).toEqual('Test')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
   })
 
   it('sm', () => {
-    const { getByTestId } = render(<Button size="sm">Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button size="sm">Test</Button>)
 
-    expect(el.classList.toString()).toContain('text-sm')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('text-sm')
   })
 
   it('lg', () => {
-    const { getByTestId } = render(<Button size="lg">Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button size="lg">Test</Button>)
 
-    expect(el.classList.toString()).toContain('text-lg')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('text-lg')
   })
 
   it('primary', () => {
-    const { getByTestId } = render(<Button variant="primary">Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button variant="primary">Test</Button>)
 
-    expect(el.classList.toString()).toContain('bg-sky-400')
-    expect(el.classList.toString()).toContain('hover:bg-sky-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('bg-sky-400')
+    expect(el).toHaveClass('hover:bg-sky-500')
   })
 
   it('secondary', () => {
-    const { getByTestId } = render(<Button variant="secondary">Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button variant="secondary">Test</Button>)
 
-    expect(el.classList.toString()).toContain('bg-teal-400')
-    expect(el.classList.toString()).toContain('hover:bg-teal-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('bg-teal-400')
+    expect(el).toHaveClass('hover:bg-teal-500')
   })
 
   it('tertiary', () => {
-    const { getByTestId } = render(<Button variant="tertiary">Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button variant="tertiary">Test</Button>)
 
-    expect(el.classList.toString()).toContain('bg-emerald-400')
-    expect(el.classList.toString()).toContain('hover:bg-emerald-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('bg-emerald-400')
+    expect(el).toHaveClass('hover:bg-emerald-500')
   })
 
   it('error', () => {
-    const { getByTestId } = render(<Button variant="error">Test</Button>)
-    const el = getByTestId('button')
+    const { getByText } = render(<Button variant="error">Test</Button>)
 
-    expect(el.classList.toString()).toContain('bg-red-400')
-    expect(el.classList.toString()).toContain('hover:bg-red-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('bg-red-400')
+    expect(el).toHaveClass('hover:bg-red-500')
   })
 
   it('primary outline', () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <Button variant="primary" outline>
         Test
       </Button>,
     )
-    const el = getByTestId('button')
 
-    expect(el.classList.toString()).toContain('border-sky-400')
-    expect(el.classList.toString()).toContain('hover:border-sky-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('border-sky-400')
+    expect(el).toHaveClass('hover:border-sky-500')
   })
 
   it('secondary outline', () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <Button variant="secondary" outline>
         Test
       </Button>,
     )
-    const el = getByTestId('button')
 
-    expect(el.classList.toString()).toContain('border-teal-400')
-    expect(el.classList.toString()).toContain('hover:border-teal-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('border-teal-400')
+    expect(el).toHaveClass('hover:border-teal-500')
   })
 
   it('tertiary outline', () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <Button variant="tertiary" outline>
         Test
       </Button>,
     )
-    const el = getByTestId('button')
 
-    expect(el.classList.toString()).toContain('border-emerald-400')
-    expect(el.classList.toString()).toContain('hover:border-emerald-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('border-emerald-400')
+    expect(el).toHaveClass('hover:border-emerald-500')
   })
 
   it('error outline', () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <Button variant="error" outline>
         Test
       </Button>,
     )
-    const el = getByTestId('button')
 
-    expect(el.classList.toString()).toContain('border-red-400')
-    expect(el.classList.toString()).toContain('hover:border-red-500')
+    const el = getByText('Test')
+
+    expect(el).toHaveClass('border-red-400')
+    expect(el).toHaveClass('hover:border-red-500')
   })
 })

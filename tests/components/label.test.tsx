@@ -1,16 +1,14 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { Label } from '~/app/components'
 
-cleanup()
-
-describe('label', () => {
+describe('components.label', () => {
   it('render', () => {
-    const { getByTestId } = render(<Label htmlFor="test">Test</Label>)
-    const el = getByTestId('label')
+    const { getByText } = render(<Label htmlFor="test">Test</Label>)
 
-    expect(el.getAttribute('for')).toEqual('test')
-    expect(el.innerText).toEqual('Test')
+    const el = getByText('Test')
+
+    expect(el).toHaveAttribute('for', 'test')
+    expect(el).toHaveTextContent('Test')
   })
 })

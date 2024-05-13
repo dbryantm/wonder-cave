@@ -1,71 +1,76 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import cleanup from '~/tests'
 import { GridCol } from '~/app/components'
 
-cleanup()
-
-describe('grid.col', () => {
+describe('components.grid.col', () => {
   it('render', () => {
-    const { getByTestId } = render(<GridCol>Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol>Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
   })
 
   it('span', () => {
-    const { getByTestId } = render(<GridCol span={3}>Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol span={3}>Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-span-3')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-span-3')
   })
 
   it('span full', () => {
-    const { getByTestId } = render(<GridCol span="full">Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol span="full">Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-span-full')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-span-full')
   })
 
   it('span auto', () => {
-    const { getByTestId } = render(<GridCol span="auto">Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol span="auto">Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-auto')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-auto')
   })
 
   it('start', () => {
-    const { getByTestId } = render(<GridCol start={3}>Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol start={3}>Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-start-3')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-start-3')
   })
 
   it('start auto', () => {
-    const { getByTestId } = render(<GridCol start="auto">Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol start="auto">Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-start-auto')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-start-auto')
   })
 
   it('end', () => {
-    const { getByTestId } = render(<GridCol end={3}>Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol end={3}>Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-end-3')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-end-3')
   })
 
   it('end auto', () => {
-    const { getByTestId } = render(<GridCol end="auto">Test</GridCol>)
-    const el = getByTestId('grid.col')
+    const { getByText } = render(<GridCol end="auto">Test</GridCol>)
 
-    expect(el.innerText).toEqual('Test')
-    expect(el.classList.toString()).toContain('col-end-auto')
+    const el = getByText('Test')
+
+    expect(el).toHaveTextContent('Test')
+    expect(el).toHaveClass('col-end-auto')
   })
 })

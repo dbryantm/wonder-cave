@@ -10,7 +10,7 @@ export interface CardImageProps extends ComponentPropsWithRef<'img'>, VariantPro
 export function CardImage({ alt, className, ...props }: CardImageProps) {
   return (
     <div className={cx(variants(), className)}>
-      <img className="rounded-full" {...props} alt={alt} data-testid="card.image" />
+      <img className="rounded-full" {...props} alt={alt} />
     </div>
   )
 }

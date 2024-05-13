@@ -232,7 +232,6 @@ export function Grid({
         className,
       )}
       {...props}
-      data-testid="grid"
     >
       {children}
     </div>

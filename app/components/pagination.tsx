@@ -7,7 +7,7 @@ export interface PaginationProps extends ComponentPropsWithRef<'div'>, VariantPr
 
 export function Pagination({ className, children, ...props }: PaginationProps) {
   return (
-    <div className={cx(variants(), className)} {...props} data-testid="pagination">
+    <div className={cx(variants(), className)} {...props}>
       {children}
     </div>
   )
