@@ -60,10 +60,10 @@ This would be handled when running `bun run prisma:migrate`
 
 `bun run prisma:reset`
 
-## Data
+## Examples
 
 Use to create a file for testing uploads
 
 ### Creating a new CSV file
 
-`bun run data:seed`
+`bun run example:seed`
