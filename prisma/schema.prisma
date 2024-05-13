@@ -13,15 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Batch {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique
+  file      Bytes
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  contact Contact[]
+
+  @@map("batch")
+}
+
 model Contact {
   id        Int      @id @default(autoincrement())
+  batchId   Int?
   uuid      String   @unique
   firstName String
   lastName  String
-  email     String
+  email     String   @unique
   phone     String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
+
+  batch Batch? @relation(fields: [batchId], references: [id])
 
   @@map("contact")
 }

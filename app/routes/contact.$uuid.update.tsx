@@ -1,8 +1,9 @@
 import { redirect, type ActionFunctionArgs, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
-import { useLoaderData, Form } from '@remix-run/react'
+import { useActionData, useLoaderData } from '@remix-run/react'
 import { db } from '~/app/.server'
-import { contactUpsertSchema } from '~/app/schemas'
-import { Button, Input, Label, Link } from '~/app/components'
+import { contactUpdateSchema, type Contact } from '~/app/schemas'
+import { formatErrors, type FormError } from '~/app/helpers'
+import { ContactForm } from '~/app/forms'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Update Contact | Wonder Cave' }]
@@ -20,7 +21,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 
   try {
-    const data = contactUpsertSchema.parse(input)
+    const { data, error, success } = contactUpdateSchema.safeParse(input)
+    if (!success) {
+      return formatErrors(error)
+    }
+
     await db.contact.update({ data, where: { uuid } })
 
     return redirect('/')
@@ -45,7 +50,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 }
 
 export default function ContactUpdateRoute() {
-  const contact = useLoaderData<typeof loader>()
+  const contact = useLoaderData<typeof loader>() as unknown as Contact
+  const errors = useActionData<typeof action>() as FormError[]
 
   if (!contact) return null
 
@@ -56,71 +62,7 @@ export default function ContactUpdateRoute() {
         Please use the form below to update the information for{' '}
         <strong>{`${contact.firstName} ${contact.lastName}`}</strong>.
       </p>
-      <Form className="form" action={`/contact/${contact.uuid}/update`} method="post">
-        <Input type="hidden" name="uuid" defaultValue={contact.uuid} />
-        <div className="mb-4">
-          <Label className="block" htmlFor="firstName">
-            <strong>First Name</strong>
-          </Label>
-          <Input
-            type="text"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-            minLength={3}
-            defaultValue={contact.firstName}
-          />
-        </div>
-        <div className="mb-4">
-          <Label className="block" htmlFor="lastName">
-            <strong>Last Name</strong>
-          </Label>
-          <Input
-            type="text"
-            id="lastName"
-            name="lastName"
-            placeholder="Last Name"
-            minLength={3}
-            defaultValue={contact.lastName}
-          />
-        </div>
-        <div className="mb-4">
-          <Label className="block" htmlFor="email">
-            <strong>Email</strong>
-          </Label>
-          <Input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="first.last@email.com"
-            minLength={3}
-            defaultValue={contact.email}
-          />
-        </div>
-        <div className="mb-4">
-          <Label className="block" htmlFor="phone">
-            <strong>Phone</strong>
-          </Label>
-          <Input
-            type="text"
-            id="phone"
-            name="phone"
-            minLength={12}
-            maxLength={12}
-            placeholder="123-456-7890"
-            pattern="\d{3}-\d{3}-\d{4}"
-            defaultValue={contact.phone}
-          />
-        </div>
-        <div className="flex gap-2">
-          <Button type="submit" variant="primary">
-            Submit
-          </Button>
-          <Link to="/" button variant="secondary" outline>
-            Cancel
-          </Link>
-        </div>
-      </Form>
+      <ContactForm contact={contact} errors={errors} />
     </>
   )
 }

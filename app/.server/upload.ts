@@ -1,8 +1,8 @@
 import { redirect, type TypedResponse } from '@remix-run/node'
 import { parseString } from 'fast-csv'
-import { type Contact } from '../schemas'
+import { type Contact } from '~/app/schemas'
 
-export function upload(text: string, cb: (rows: Contact[]) => Promise<TypedResponse<never> | undefined>) {
+export function uploadFile(text: string, cb: (rows: Contact[]) => Promise<TypedResponse<never> | undefined>) {
   const rows: Contact[] = []
 
   parseString(text, { headers: true })

@@ -1,2 +1,2 @@
-export * from './batch'
 export * from './contact'
+export * from './upload'

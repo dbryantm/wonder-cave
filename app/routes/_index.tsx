@@ -71,7 +71,7 @@ export default function IndexRoute() {
             <GridCol key={contact.uuid}>
               <Card>
                 <CardHeader>
-                  <CardTitle>
+                  <CardTitle className="truncate">
                     <Link to={`/contact/${contact.uuid}`}>{`${contact.firstName} ${contact.lastName}`}</Link>
                   </CardTitle>
                 </CardHeader>

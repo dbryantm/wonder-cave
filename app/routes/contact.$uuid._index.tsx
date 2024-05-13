@@ -1,7 +1,7 @@
 import { type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
-import { useLoaderData, Form } from '@remix-run/react'
+import { useLoaderData } from '@remix-run/react'
 import { db } from '~/app/.server'
-import { Input, Link } from '~/app/components'
+import { Link } from '~/app/components'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'View Contact | Wonder Cave' }]
@@ -30,34 +30,31 @@ export default function ContactViewRoute() {
   return (
     <>
       <h1 className="mb-4 text-2xl">View Contact</h1>
-      <Form className="form" action={`/contact/${contact.uuid}`} method="post">
-        <Input type="hidden" name="uuid" defaultValue={contact.uuid} />
-        <div className="mb-4">
-          <strong>First Name</strong>
-          <p>{contact.firstName}</p>
-        </div>
-        <div className="mb-4">
-          <strong>Last Name</strong>
-          <p>{contact.lastName}</p>
-        </div>
-        <div className="mb-4">
-          <strong>Email</strong>
-          <p>
-            <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
-          </p>
-        </div>
-        <div className="mb-4">
-          <strong>Phone</strong>
-          <p>
-            <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <Link to="/" button variant="secondary" outline>
-            Cancel
-          </Link>
-        </div>
-      </Form>
+      <div className="mb-4">
+        <strong>First Name</strong>
+        <p>{contact.firstName}</p>
+      </div>
+      <div className="mb-4">
+        <strong>Last Name</strong>
+        <p>{contact.lastName}</p>
+      </div>
+      <div className="mb-4">
+        <strong>Email</strong>
+        <p>
+          <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
+        </p>
+      </div>
+      <div className="mb-4">
+        <strong>Phone</strong>
+        <p>
+          <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
+        </p>
+      </div>
+      <div className="flex gap-2">
+        <Link to="/" button variant="secondary" outline>
+          Cancel
+        </Link>
+      </div>
     </>
   )
 }

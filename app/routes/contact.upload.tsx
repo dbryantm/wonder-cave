@@ -1,9 +1,10 @@
 import { redirect, type ActionFunctionArgs, type MetaFunction } from '@remix-run/node'
-import { Form } from '@remix-run/react'
-import { parse } from 'valibot'
-import { db, upload } from '~/app/.server'
-import { contactUpsertSchema } from '~/app/schemas'
-import { Button, Input, Link } from '~/app/components'
+import { useActionData } from '@remix-run/react'
+import { v4 } from 'uuid'
+import { db, uploadFile } from '~/app/.server'
+import { batchCreateSchema, contactCreateSchema, contactUploadSchema } from '~/app/schemas'
+import { formatErrors, type FormError } from '~/app/helpers'
+import { UploadForm } from '~/app/forms'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Upload Contact(s) | Wonder Cave' }]
@@ -11,48 +12,74 @@ export const meta: MetaFunction = () => {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData()
-  const file = form.get('upload') as File
-  const text = await file.text()
+  const upload = form.get('upload') as File
+  const file = await upload.text()
 
-  console.log(text)
+  const { data, error, success } = contactUploadSchema.safeParse({ upload: file })
+  if (!success) {
+    return formatErrors(error)
+  }
 
   try {
-    return upload(text, async (rows) => {
-      rows.forEach(async (row) => {
-        const data = parse(contactUpsertSchema, row)
+    if (data.upload !== '') {
+      const fileBuffer = await upload.arrayBuffer()
+      const batchData = {
+        uuid: v4(),
+        file: Buffer.from(fileBuffer),
+      }
 
-        await db.contact.createMany({
-          data,
-        })
+      batchCreateSchema.parse(batchData)
+      const batch = await db.batch.create({
+        data: {
+          uuid: v4(),
+          file: Buffer.from(fileBuffer),
+        },
       })
 
-      return redirect('/')
-    })
+      if (batch) {
+        return uploadFile(data.upload, async (rows) => {
+          rows.forEach(async (row) => {
+            contactCreateSchema.parse({
+              ...row,
+              uuid: v4(),
+            })
+
+            await db.contact.upsert({
+              create: {
+                ...row,
+                batchId: batch.id,
+                uuid: v4(),
+              },
+              update: {
+                ...row,
+              },
+              where: {
+                email: row.email,
+              },
+            })
+          })
+
+          return redirect('/')
+        })
+      }
+    }
   } catch (err) {
     // handle error
   }
+
+  return null
 }
 
 export default function ContactUploadRoute() {
+  const errors = useActionData<typeof action>() as unknown as FormError[]
+
   return (
     <>
       <h1 className="text-2xl">Upload Contact(s)</h1>
       <div className="mb-4">
         <p>Please select a file to upload multiple contacts.</p>
       </div>
-      <Form className="form" action="/contact/upload" method="post" encType="multipart/form-data">
-        <div className="mb-4">
-          <Input className="rounded border-none bg-transparent p-0 text-current" name="upload" type="file" />
-        </div>
-        <div className="flex gap-2">
-          <Button type="submit" variant="primary">
-            Submit
-          </Button>
-          <Link to="/" button variant="secondary" outline>
-            Cancel
-          </Link>
-        </div>
-      </Form>
+      <UploadForm errors={errors} />
     </>
   )
 }

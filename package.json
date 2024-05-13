@@ -19,7 +19,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:reset": "prisma migrate reset",
     "prisma:seed": "prisma db seed",
-    "data:seed": "bun run ./data/seed.ts",
+    "example:seed": "bun run ./example/seed.ts",
     "prepare": "husky"
   },
   "prisma": {
